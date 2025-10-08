@@ -6,7 +6,27 @@ __pycache__/
 # IDE files
 .idea/
 
+# PyInstaller
+build/
+dist/
+*.spec
+*.pyz
+*.pkg
+*.toc
+localpycs/
+
+# Python bytecode
+*.pyc
+*.pyo
+*.pyd
+
 # Output files
 *.csv
 *.html
 
+# System files
+Thumbs.db
+.DS_Store
+
+# Otros temporales
+*.log
