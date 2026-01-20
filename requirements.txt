@@ -1,4 +1,8 @@
 requests
-pandas
 beautifulsoup4
-
+pandas
+flask
+flask-cors
+flask-session
+lxml
+openpyxl

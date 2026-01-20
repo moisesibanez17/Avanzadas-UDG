@@ -1,0 +1,44 @@
+/* Estilos adicionales para la página de resultados */
+
+.no-results {
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+.no-results i {
+    font-size: 5rem;
+    color: var(--text-gray);
+    margin-bottom: 1.5rem;
+}
+
+.no-results p {
+    font-size: 1.2rem;
+    color: var(--text-gray);
+    margin-bottom: 2rem;
+}
+
+.results-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.btn {
+    text-decoration: none;
+    display: inline-flex;
+}
+
+/* Ajuste para table en fondo blanco */
+#resultsTable thead {
+    background: rgba(251, 191, 36, 0.15);
+}
+
+#resultsTable tbody tr:hover {
+    background: var(--bg-gray);
+}
+
+/* Footer text color adjustment */
+.footer {
+    color: var(--text-gray);
+}

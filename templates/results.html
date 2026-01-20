@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados - SIIAU UDG</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="background-gradient"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo-container">
+                <img src="/assets/GB WY.png" alt="Grupo Básicas" class="grupo-logo">
+                <img src="/assets/GD WY.png" alt="Grupo Divisas" class="grupo-logo">
+                <img src="/assets/GI WY.png" alt="Grupo Ingenierías" class="grupo-logo">
+            </div>
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                <h1>Resultados de Búsqueda</h1>
+            </div>
+            <p class="subtitle">Sistema SIIAU - Universidad de Guadalajara</p>
+        </header>
+
+        <!-- Results Section -->
+        <div class="glass-card results-section">
+            <div class="results-header">
+                <h2>
+                    <i class="fas fa-list-alt"></i>
+                    Oferta Académica Encontrada
+                </h2>
+                <div class="results-actions">
+                    <span class="results-count">{{ count }} registro{{ 's' if count != 1 else '' }} encontrado{{ 's' if
+                        count != 1 else '' }}</span>
+                    <button id="downloadBtn" class="btn btn-download">
+                        <i class="fas fa-download"></i>
+                        Descargar Excel
+                    </button>
+                    <a href="/" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i>
+                        Nueva Búsqueda
+                    </a>
+                </div>
+            </div>
+
+            {% if count > 0 %}
+            <div class="table-container">
+                <table id="resultsTable">
+                    <thead>
+                        <tr>
+                            <th>NRC</th>
+                            <th>Clave</th>
+                            <th>Materia</th>
+                            <th>Sec</th>
+                            <th>CR</th>
+                            <th>DIS</th>
+                            <th>Horas</th>
+                            <th>Días</th>
+                            <th>Edificio</th>
+                            <th>Aula</th>
+                            <th>Profesor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in data %}
+                        <tr>
+                            <td>{{ row.NRC }}</td>
+                            <td>{{ row.Clave }}</td>
+                            <td>{{ row.Materia }}</td>
+                            <td>{{ row.Sec }}</td>
+                            <td>{{ row.CR }}</td>
+                            <td>{{ row.DIS }}</td>
+                            <td>{{ row.Horas }}</td>
+                            <td>{{ row.Dias }}</td>
+                            <td>{{ row.Edificio }}</td>
+                            <td>{{ row.Aula }}</td>
+                            <td>{{ row.Profesor }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <div class="no-results">
+                <i class="fas fa-inbox"></i>
+                <p>No se encontraron resultados con los filtros especificados</p>
+                <a href="/" class="btn btn-primary">
+                    <i class="fas fa-search"></i>
+                    Realizar Nueva Búsqueda
+                </a>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Desarrollado para estudiantes de la Universidad de Guadalajara</p>
+            <p class="footer-note">
+                <i class="fas fa-info-circle"></i>
+                Los datos son extraídos del sistema oficial SIIAU
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // Download Excel functionality
+        document.getElementById('downloadBtn')?.addEventListener('click', async function () {
+            try {
+                const data = {{ data | tojson | safe
+            }};
+
+        const response = await fetch('/api/download-excel', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ data: data })
+        });
+
+        if (!response.ok) {
+            throw new Error('Error al descargar el archivo');
+        }
+
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `oferta_academica_${new Date().getTime()}.xlsx`;
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+
+            } catch (error) {
+            console.error('Error:', error);
+            alert('Error al descargar el archivo');
+        }
+        });
+    </script>
+</body>
+
+</html>
