@@ -6,3 +6,4 @@ flask-cors
 flask-session
 lxml
 openpyxl
+gunicorn
