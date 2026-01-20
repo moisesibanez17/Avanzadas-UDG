@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="/style.css">
 </head>
 
 <body>
@@ -56,9 +56,28 @@
                     </label>
                     <select name="centro" id="centro" class="form-input" required>
                         <option value="">Selecciona un centro...</option>
-                        {% for key, value in centros.items() %}
-                        <option value="{{ value }}">{{ value }}</option>
-                        {% endfor %}
+                        <option value="CUAAD - Arte, Arquitectura y Diseño">CUAAD - Arte, Arquitectura y Diseño</option>
+                        <option value="CUCBA - Ciencias Biológicas y Agropecuarias">CUCBA - Ciencias Biológicas y
+                            Agropecuarias</option>
+                        <option value="CUCEA - Ciencias Económico Administrativas">CUCEA - Ciencias Económico
+                            Administrativas</option>
+                        <option value="CUCEI - Ciencias Exactas e Ingenierías">CUCEI - Ciencias Exactas e Ingenierías
+                        </option>
+                        <option value="CUCS - Ciencias de la Salud">CUCS - Ciencias de la Salud</option>
+                        <option value="CUCSH - Ciencias Sociales y Humanidades">CUCSH - Ciencias Sociales y Humanidades
+                        </option>
+                        <option value="CUALTOS - de los Altos">CUALTOS - de los Altos</option>
+                        <option value="CUCIENEGA - de la Ciénega">CUCIENEGA - de la Ciénega</option>
+                        <option value="CUCOSTA - de la Costa">CUCOSTA - de la Costa</option>
+                        <option value="CUCSUR - de la Costa Sur">CUCSUR - de la Costa Sur</option>
+                        <option value="CUNORTE - del Norte">CUNORTE - del Norte</option>
+                        <option value="CUSUR - del Sur">CUSUR - del Sur</option>
+                        <option value="CUTONALA - de Tonalá">CUTONALA - de Tonalá</option>
+                        <option value="SUV - Sistema de Universidad Virtual">SUV - Sistema de Universidad Virtual
+                        </option>
+                        <option value="CUTLAJOMULCO - de Tlajomulco">CUTLAJOMULCO - de Tlajomulco</option>
+                        <option value="CUVALLES - de los Valles">CUVALLES - de los Valles</option>
+                        <option value="CUZAPOTLANEJO - de Zapotlanejo">CUZAPOTLANEJO - de Zapotlanejo</option>
                     </select>
                 </div>
 
@@ -260,7 +279,7 @@
         </footer>
     </div>
 
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="/script.js"></script>
 </body>
 
 </html>
